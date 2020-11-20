@@ -17,6 +17,14 @@
                         <textarea class="form-control" name="description"></textarea>
                     </div>
                     <div class="form-group">
+                       <select name="created_by" class="custom-select">
+                           @foreach ($users as $user)
+                               <option value="{{$user->id}}">{{$user->name.'('. $user->email .')'}}</option>
+                           @endforeach
+
+                       </select>
+                    </div>
+                    <div class="form-group">
                         <label for="tanggal">Event Date:</label>
                         <input type="date" class="form-control" name="event_date">
                     </div>

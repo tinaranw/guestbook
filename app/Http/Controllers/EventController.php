@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -15,7 +16,8 @@ class EventController extends Controller
     public function index()
     {
         //get all data from events table
-        $events = Event::all();
+        $events = Event::all(); // SELECT * FROM
+        
         return view('event.index', compact('events'));
     }
 
@@ -27,7 +29,11 @@ class EventController extends Controller
     public function create()
     {
         //display add / create form
-        return view('event.addEvent');
+        $pages = 'event';
+        // $users =  User::pluck('id', 'name', 'email'); // SELECT COLUMN
+        $users =  User::all();
+        // dd($users);
+        return view('event.addEvent',compact('pages','users'));
     }
 
     /**

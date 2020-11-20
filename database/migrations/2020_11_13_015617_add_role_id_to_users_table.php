@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCreatedByToEventsTable extends Migration
+class AddRoleIdToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddCreatedByToEventsTable extends Migration
      */
     public function up()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->unsignedBigInteger('created_by')->index()->after('status');
-
-            $table->foreign('created_by')->references('id')->on('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('role_id')->index()->after('email');
         });
     }
 
@@ -27,9 +25,9 @@ class AddCreatedByToEventsTable extends Migration
      */
     public function down()
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn('created_by');
+        Schema::table('users', function (Blueprint $table) {
             //
+            $table->dropColumn('role_id');
         });
     }
 }

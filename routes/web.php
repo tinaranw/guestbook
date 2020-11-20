@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\ActivationController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,11 +32,22 @@ Route::view('/pages/gallery', 'gallery');
 // Route::view('/pages', 'landingpage');
 Route::view('/pages/contact', 'contact');
 Route::resource('event', EventController::class);
-Route::get('/', [StudentController::class, 'index'])->name('index');
+Route::get('/', [EventController::class, 'index'])->name('index');
+Route::get('student/', [StudentController::class, 'index'])->name('index');
 Route::get('student/{student}', [StudentController::class, 'edit'])->name('student.edit');
 Route::patch('update/{student}', [StudentController::class, 'update'])->name('student.update');
 Route::delete('delete/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 Route::view('addStudent', 'student.addEvent')->name('student.create');
 Route::post('create',  [StudentController::class, 'store'])->name('student.store');
+// Route::get('/', [UserController::class, 'index'])->name('index');
+Route::get('user', [UserController::class, 'index'])->name('index');
+// Route::resource('user', UserController::class);
+// Route::get('/', [UserController::class, 'index'])->name('index');
 // Route::resource('student', StudentController::class);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('activate',[ActivationController::class, 'activate'])->name('activate');

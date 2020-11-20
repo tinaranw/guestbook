@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->enum('status',['0','1'])
                 ->default('0')
-                ->comment('0=close, 1=open');
+                ->comment('0 = close, 1 = open');
             $table->bigInteger('noa')
                 ->default(0)
                 ->comment('Number of Attendant');

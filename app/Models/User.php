@@ -19,7 +19,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'role_id',
+        'is_login',
+        'activation_token',
     ];
 
     /**
@@ -42,6 +46,29 @@ class User extends Authenticatable
     ];
 
     public function events(){
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'created_by', 'id');
+    }
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+    public function isAdmin(){
+        if ($this->role->name =='Admin' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isCreator(){
+        if ($this->role->name =='Creator' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
+    }
+
+    public function isUser(){
+        if ($this->role->name =='User' && $this->is_login == '1'){
+            return true;
+        }
+        return false;
     }
 }

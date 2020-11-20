@@ -23,7 +23,9 @@
                     <th scope="col">Owned by</th>
                     <th scope="col">Updated At</th>
                     <th scope="col">Created At</th>
+                    @auth
                     <th scope="col">Action</th>
+                    @endauth
                 </tr>
                 </thead>
                 <tbody>

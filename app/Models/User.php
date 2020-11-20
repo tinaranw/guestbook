@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'role_id',
         'is_login',
+        'is_active',
+        'is_verified',
         'activation_token',
     ];
 

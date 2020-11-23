@@ -6,7 +6,7 @@ use App\Events\ActivationEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class RegisterNewsLetterListener
+class RegisterNewsletterListener
 {
     /**
      * Create the event listener.

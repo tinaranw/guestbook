@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $pages = 'user';
-        $users = User::all();
-        return view('user.index', compact('pages', 'users'));
+        //
     }
 
     /**

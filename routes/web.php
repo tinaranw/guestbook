@@ -51,3 +51,31 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('activate',[ActivationController::class, 'activate'])->name('activate');
+
+
+Route::get('activate', [ActivationController::class, 'activate'])->name('activate');
+
+Route::group([
+    'middleware' => 'admin',
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function () {
+    Route::resource('user', UserController::class);
+    Route::resource('event', AdminEventController::class);
+});
+
+Route::group([
+    'middleware' => 'creator',
+    'prefix' => 'creator',
+    'as' => 'creator.'
+], function () {
+    Route::resource('event', EventController::class);
+});
+
+Route::group([
+    'middleware' => 'user',
+    'prefix' => 'user',
+    'as' => 'user.'
+], function () {
+    Route::resource('user', UUserController::class);
+});

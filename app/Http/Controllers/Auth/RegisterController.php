@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Events\ActivationEvent;
+use App\Http\Controllers\Controller;
+use App\Mail\ActivationMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-
 
 class RegisterController extends Controller
 {
@@ -73,24 +73,23 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id' =>$data['role_id'],
+            'role_id' => $data['role_id'],
             'activation_token' => Str::random(20),
         ]);
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $this->validator($request->all())->validate();
+
         $user = $this->create($request->all());
 
-        if(empty($user)){
+        if (empty($user)) {
             redirect()->route('register');
         }
 
-        //send email
-        // Mail::to($user->email)->send(new ActivationMail($user));
-        //regis email ke table newsletter
         event(new ActivationEvent($user));
 
-        return redirect('login')->with('Success', 'Registration complete, please verify your email');
+        return redirect('login')->with('Success', 'Registration complete, please verify your email!');
     }
 }

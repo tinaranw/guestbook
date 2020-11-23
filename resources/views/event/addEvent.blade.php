@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('content')
     <div class="container" style="margin-top: 20px;">
         <div class="row">
@@ -17,12 +17,11 @@
                         <textarea class="form-control" name="description"></textarea>
                     </div>
                     <div class="form-group">
-                       <select name="created_by" class="custom-select">
-                           @foreach ($users as $user)
-                               <option value="{{$user->id}}">{{$user->name.'('. $user->email .')'}}</option>
-                           @endforeach
-
-                       </select>
+                        <select name="created_by" class="custom-select">
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name .' ('. $user->email .')' }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Event Date:</label>
